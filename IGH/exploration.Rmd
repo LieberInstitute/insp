@@ -1,0 +1,146 @@
+---
+title: "Quick exploration of IGH regions"
+author: "L. Collado-Torres"
+date: "2/23/2017"
+output:
+  html_document:
+    code_folding: show
+    toc: true
+    toc_float: true
+---
+
+## Setup
+
+The following code loads the _RangedSummarizedExperiment_ objects for each of the three main groups of data: SRA (almost 50,000 RNA-seq samples), GTEx and TCGA. We have separate objects because the metadata for GTEx and TCGA includes variables that are not present in SRA and because you might want to treat each dataset differently.
+
+```{r 'setup', message = FALSE}
+startTime <- Sys.time()
+## Load libraries
+library('SummarizedExperiment')
+library('GenomicRanges')
+library('ggplot2')
+library('DT')
+library('devtools')
+
+## Load files
+projects <- c('sra', 'TCGA', 'SRP012682')
+rse <- lapply(projects, function(project) {
+    load(paste0('rse_', project, '.Rdata'))
+    return(rse)
+})
+projects <- names(rse) <- c('SRA', 'TCGA', 'GTEx')
+```
+
+These counts are from 10 different regions from chr14. The following code visualizes the regions.
+
+```{r 'regions', fig.width = 7, fig.height = 7}
+regions <- rowRanges(rse[[1]])
+
+## Taken from http://bioconductor.org/packages/release/bioc/vignettes/IRanges/inst/doc/IRangesOverview.R
+plotRanges <- function(x, xlim = x, main = deparse(substitute(x)),
+                       col = "black", sep = 0.5, ...) 
+{
+  height <- 1
+  if (is(xlim, "Ranges"))
+    xlim <- c(min(start(xlim)), max(end(xlim)))
+  bins <- disjointBins(IRanges(start(x), end(x) + 1))
+  plot.new()
+  plot.window(xlim, c(0, max(bins)*(height + sep)))
+  ybottom <- bins * (sep + height) - height
+  rect(start(x)-0.5, ybottom, end(x)+0.5, ybottom + height, col = col, ...)
+  title(main)
+  axis(1)
+}
+
+plotRanges(ranges(regions), main = 'IGH regions on chr14')
+```
+
+
+## Visualize counts
+
+Now that we have the data loaded, we can visualize the counts. The first plot shows the $\log_{10}(counts + 1)$ and the second the $\log_2(RPKM + 1)$ distribution. Looks like there is plenty of data to look at.
+
+```{r 'counts', fig.width = 15, fig.height = 10}
+## Construct a data.frame that will be easy to use with ggplot2
+counts <- mapply(function(se, project) {
+    df <- data.frame(
+        counts = as.vector(assays(se)$counts),
+        region = factor(rep(names(se), each = ncol(se)), levels = names(se)),
+        project = rep(project, ncol(se) * nrow(se)),
+        width = rep(width(regions), each = ncol(se))
+    )
+    return(df)
+}, rse, projects, SIMPLIFY = FALSE)
+counts <- do.call(rbind, counts)
+rownames(counts) <- NULL
+
+## Calculate RPKMs
+## Formula: http://www.metagenomics.wiki/pdf/definition/rpkm-calculation
+counts$RPKM <- counts$counts / (counts$width/1000 * 40)
+
+ggplot(counts, aes(y = log10(counts + 1), x = region)) + geom_boxplot() +
+    facet_grid(. ~ project) + coord_flip() + theme_bw(base_size = 18)
+ggplot(counts, aes(y = log2(RPKM + 1), x = region)) + geom_boxplot() +
+    facet_grid(. ~ project) + coord_flip() + theme_bw(base_size = 18)
+```
+
+## Select studies
+
+The original goal was to use this information to then select some SRA studies to look at. This is just some example code that might help you get started and is not a proper selection. The following interactive table has the percent of samples in a project that have a $\log_{10} (RPKM +1)$ greater than 1 for _IGH-W_ ordered from higher to lower. It also shows the total number of samples for the given SRA project.
+
+```{r 'selectionSRA', results = 'asis'}
+## Looking at just IGH-W for SRA
+igh_w_sra <- subset(counts, region == 'IGH-W' & project == 'SRA')
+stopifnot(nrow(igh_w_sra) == ncol(rse[['SRA']]))
+
+## Filter IGH-W data
+has_data <- log2(igh_w_sra$RPKM + 1) > 1
+has_data_by_project <- split(has_data, colData(rse[['SRA']])$project)
+has_data_mean <- sapply(has_data_by_project, mean)
+
+## Create table with proper ordering
+studies <- data.frame(
+    project = names(has_data_mean),
+    percent_with_data = round(has_data_mean * 100, 2),
+    n_samples = sapply(has_data_by_project, length)
+)
+studies <- studies[order(has_data_mean, decreasing = TRUE), ]
+
+## Create interactive table
+datatable(studies,
+    options = list(pagingType='full_numbers', pageLength=25, scrollX='100%'),
+    rownames = FALSE, style = 'bootstrap', filter = 'top')
+    
+## Say you want studies where at least 80% of the samples have data in IGH-W
+## then you would interactively filter the "percent_with_data" column to 80
+## which will give you the following number of studies:
+sum(studies$percent_with_data > 80)
+```
+
+
+## Reproducibility information
+
+Date the report was generated.
+
+```{r reproducibility1, echo=FALSE}
+## Date the report was generated
+Sys.time()
+```
+
+Wallclock time spent generating the report.
+
+```{r reproducibility2, echo=FALSE}
+## Processing time in seconds
+totalTime <- diff(c(startTime, Sys.time()))
+round(totalTime, digits=3)
+```
+
+`R` session information.
+
+```{r reproducibility3, echo=FALSE}
+## Session info
+options(width = 120)
+session_info()
+```
+
+Pandoc version used: `r rmarkdown::pandoc_version()`.
