@@ -11,12 +11,13 @@ output:
 
 ## Setup
 
-The following code loads the _RangedSummarizedExperiment_ objects for each of the three main groups of data: SRA (almost 50,000 RNA-seq samples), GTEx and TCGA. We have separate objects because the metadata for GTEx and TCGA includes variables that are not present in SRA and because you might want to treat each dataset differently.
+The following code loads the _RangedSummarizedExperiment_ objects for each of the three main groups of data: SRA (almost 50,000 RNA-seq samples), GTEx and TCGA. We have separate objects because the metadata for GTEx and TCGA includes variables that are not present in SRA and because you might want to treat each dataset differently. After loading them, we normalize them to a library size of 40 million 100 bp reads using `scale_counts()` with the argument `round = FALSE` to keep fractional read counts.
 
 ```{r 'setup', message = FALSE}
 startTime <- Sys.time()
 ## Load libraries
 library('SummarizedExperiment')
+library('recount')
 library('GenomicRanges')
 library('ggplot2')
 library('DT')
@@ -26,7 +27,10 @@ library('devtools')
 projects <- c('sra', 'TCGA', 'SRP012682')
 rse <- lapply(projects, function(project) {
     load(paste0('rse_', project, '.Rdata'))
-    return(rse)
+    
+    ## Scale counts
+    result <- scale_counts(rse, round = FALSE)
+    return(result)
 })
 projects <- names(rse) <- c('SRA', 'TCGA', 'GTEx')
 ```
@@ -86,7 +90,7 @@ ggplot(counts, aes(y = log2(RPKM + 1), x = region)) + geom_boxplot() +
 
 ## Select studies
 
-The original goal was to use this information to then select some SRA studies to look at. This is just some example code that might help you get started and is not a proper selection. The following interactive table has the percent of samples in a project that have a $\log_{10} (RPKM +1)$ greater than 1 for _IGH-W_ ordered from higher to lower. It also shows the total number of samples for the given SRA project.
+The original goal was to use this information to then select some SRA studies to look at. This is just some example code that might help you get started and is not a proper selection. The following interactive table has the percent of samples in a project that have a $\log_{10} (RPKM +1)$ greater than 0.1 for _IGH-W_ ordered from higher to lower. It also shows the total number of samples for the given SRA project.
 
 ```{r 'selectionSRA', results = 'asis'}
 ## Looking at just IGH-W for SRA
@@ -94,7 +98,7 @@ igh_w_sra <- subset(counts, region == 'IGH-W' & project == 'SRA')
 stopifnot(nrow(igh_w_sra) == ncol(rse[['SRA']]))
 
 ## Filter IGH-W data
-has_data <- log2(igh_w_sra$RPKM + 1) > 1
+has_data <- log2(igh_w_sra$RPKM + 1) > 0.1
 has_data_by_project <- split(has_data, colData(rse[['SRA']])$project)
 has_data_mean <- sapply(has_data_by_project, mean)
 
