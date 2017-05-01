@@ -21,7 +21,8 @@ IGHranges$coding <- grepl('coding', IGHranges$locus)
 IGHwindows <- slidingWindows(IGHranges, width = 51, step = 25)
 nwin <- elementNROWS(IGHwindows)
 IGHwindows <- unlist(IGHwindows)
-IGHwindows$locus <- rep(IGHranges$locus, nwin)
+IGHwindows$region <- rep(IGHranges$locus, nwin)
+IGHwindows$locus <- gsub('-.*', '', IGHwindows$region)
 IGHwindows$coding <- rep(IGHranges$coding, nwin)
 
 ## Should all be 51 bp windows
