@@ -56,3 +56,10 @@ png(file = paste0('counts_', region_of_interest, '.png'),
 ggplot(counts, aes(y = log10(counts + 1), x = region)) + geom_boxplot() +
     facet_grid(. ~ project) + coord_flip() + theme_bw(base_size = 18)
 dev.off()
+
+## Exclude 0 counts
+png(file = paste0('counts_GT0_', region_of_interest, '.png'),
+    height = (round(sum(rowRanges(rse[[1]])$region == region_of_interest) / 10) + 7) * 480 / 7)
+ggplot(subset(counts, counts > 0), aes(y = log10(counts + 1), x = region)) + geom_boxplot() +
+    facet_grid(. ~ project) + coord_flip() + theme_bw(base_size = 18)
+dev.off()
