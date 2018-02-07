@@ -1,0 +1,112 @@
+Loading required package: colorout
+Loading required package: methods
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, cbind, colMeans, colnames,
+    colSums, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, lengths, Map, mapply, match,
+    mget, order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rowMeans, rownames, rowSums, sapply, setdiff, sort,
+    table, tapply, union, unique, unsplit, which, which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following object is masked from ‘package:base’:
+
+    expand.grid
+
+Loading required package: IRanges
+Loading required package: GenomeInfoDb
+GRanges object with 30 ranges and 3 metadata columns:
+          seqnames                 ranges strand | Internal_Id
+             <Rle>              <IRanges>  <Rle> | <character>
+   IGHM_1    chr14 [105855906, 105856218]      * |      IGHM_1
+   IGHM_2    chr14 [105855480, 105855815]      * |      IGHM_2
+   IGHM_3    chr14 [105854917, 105855234]      * |      IGHM_3
+   IGHD_1    chr14 [105845375, 105845678]      * |      IGHD_1
+   IGHD_2    chr14 [105844825, 105844926]      * |      IGHD_2
+      ...      ...                    ...    ... .         ...
+   IGHE_1    chr14 [105601419, 105601728]      * |      IGHE_1
+   IGHE_2    chr14 [105600891, 105601211]      * |      IGHE_2
+   IGHE_3    chr14 [105600481, 105600804]      * |      IGHE_3
+  IGHA2_1    chr14 [105588089, 105588395]      * |     IGHA2_1
+  IGHA2_2    chr14 [105587554, 105587874]      * |     IGHA2_2
+              Transcript_Id         Exon_Id
+                <character>     <character>
+   IGHM_1 ENST00000390559.6 ENSE00002021546
+   IGHM_2 ENST00000390559.6 ENSE00002059161
+   IGHM_3 ENST00000390559.6 ENSE00002085653
+   IGHD_1 ENST00000613640.1 ENSE00003722227
+   IGHD_2 ENST00000613640.1 ENSE00001508233
+      ...               ...             ...
+   IGHE_1 ENST00000390541.2 ENSE00002664989
+   IGHE_2 ENST00000390541.2 ENSE00002655737
+   IGHE_3 ENST00000390541.2 ENSE00002677479
+  IGHA2_1 ENST00000390539.2 ENSE00001843246
+  IGHA2_2 ENST00000390539.2 ENSE00001508170
+  -------
+  seqinfo: 1 sequence from an unspecified genome; no seqlengths
+ [1] "IGHM_1"  "IGHM_2"  "IGHM_3"  "IGHD_1"  "IGHD_2"  "IGHD_3"  "IGHD_4" 
+ [8] "IGHD_5"  "IGHG3_1" "IGHG3_2" "IGHG3_3" "IGHG3_4" "IGHG3_5" "IGHG3_6"
+[15] "IGHG1_1" "IGHG1_2" "IGHG1_3" "IGHA1_1" "IGHA1_2" "IGHG2_1" "IGHG2_2"
+[22] "IGHG2_3" "IGHG4_1" "IGHG4_2" "IGHG4_3" "IGHE_1"  "IGHE_2"  "IGHE_3" 
+[29] "IGHA2_1" "IGHA2_2"
+[1] "Reproducibility information:"
+[1] "2018-02-07 13:47:49 EST"
+   user  system elapsed 
+  3.586   0.209   4.735 
+Session info ----------------------------------------------------------------------------------------------------------
+ setting  value                       
+ version  R version 3.4.3 (2017-11-30)
+ system   x86_64, darwin15.6.0        
+ ui       X11                         
+ language (EN)                        
+ collate  en_US.UTF-8                 
+ tz       America/New_York            
+ date     2018-02-07                  
+
+Packages --------------------------------------------------------------------------------------------------------------
+ package          * version   date       source                            
+ base             * 3.4.3     2017-12-07 local                             
+ BiocGenerics     * 0.24.0    2017-10-31 Bioconductor                      
+ bitops             1.0-6     2013-08-17 CRAN (R 3.4.0)                    
+ colorout         * 1.1-3     2018-01-09 Github (jalvesaq/colorout@31d7db0)
+ compiler           3.4.3     2017-12-07 local                             
+ datasets         * 3.4.3     2017-12-07 local                             
+ devtools         * 1.13.4    2017-11-09 CRAN (R 3.4.2)                    
+ digest             0.6.14    2018-01-14 CRAN (R 3.4.3)                    
+ GenomeInfoDb     * 1.14.0    2017-10-31 Bioconductor                      
+ GenomeInfoDbData   1.0.0     2018-01-09 Bioconductor                      
+ GenomicRanges    * 1.30.1    2017-12-21 Bioconductor                      
+ graphics         * 3.4.3     2017-12-07 local                             
+ grDevices        * 3.4.3     2017-12-07 local                             
+ IRanges          * 2.12.0    2017-10-31 Bioconductor                      
+ memoise            1.1.0     2017-04-21 CRAN (R 3.4.0)                    
+ methods          * 3.4.3     2017-12-07 local                             
+ parallel         * 3.4.3     2017-12-07 local                             
+ RCurl              1.95-4.10 2018-01-04 CRAN (R 3.4.3)                    
+ S4Vectors        * 0.16.0    2017-10-31 Bioconductor                      
+ stats            * 3.4.3     2017-12-07 local                             
+ stats4           * 3.4.3     2017-12-07 local                             
+ utils            * 3.4.3     2017-12-07 local                             
+ withr              2.1.1     2017-12-19 CRAN (R 3.4.3)                    
+ XVector            0.18.0    2017-10-31 Bioconductor                      
+ zlibbioc           1.24.0    2017-10-31 Bioconductor                      
