@@ -8,4 +8,4 @@
 ## Usage:
 # qsub IGHcoding_exons.sh 
 
-bash /users/lcollado/R/x86_64-pc-linux-gnu-library/3.4.x/recount.bwtool/extdata/jhpce/run_rse.sh -r "/dcl01/lieber/ajaffe/lab/insp/IGHcoding_exons/IGHcoding_exons.Rdata" -s "sumsIGHcoding_exons" -c 1
+bash /users/lcollado/R/x86_64-pc-linux-gnu-library/3.4.x/recount.bwtool/extdata/jhpce/run_rse.sh -r "/dcl01/ajaffe/data/lab/insp/IGHcoding_exons/IGHcoding_exons.Rdata" -s "sumsIGHcoding_exons" -c 1
