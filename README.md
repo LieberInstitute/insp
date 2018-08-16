@@ -2,4 +2,4 @@
 
 Collaboration with Jesus Martinez (INSP) with recount data
 
-Clone location: `/dcl01/lieber/ajaffe/lab/insp`
+Clone location: `/dcl01/ajaffe/data/lab/insp`
