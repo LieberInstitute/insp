@@ -4,7 +4,7 @@
 library('GenomicRanges')
 library('sessioninfo')
 
-AICD_dat <- read.csv('AICD_Kappa_regions.csv')
+AICD_dat <- read.csv('AICD_Kappa_regions_FINAL.csv')
 colnames(AICD_dat)[1] <- 'name'
 
 AICD_dat$Start <- as.integer(gsub(',', '', AICD_dat$Start))
@@ -19,6 +19,9 @@ AICD <- with(AICD_dat, GRanges(
     locus = name)
 )
 names(AICD) <- AICD$locus
+
+## Sort for bwtool
+ACID <- sort(AICD)
 
 save(AICD, file = 'AICD.Rdata')
 

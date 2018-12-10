@@ -35,9 +35,9 @@ The following object is masked from ‘package:base’:
 Loading required package: IRanges
 Loading required package: GenomeInfoDb
 [1] "Reproducibility information:"
-[1] "2018-12-06 13:07:52 EST"
+[1] "2018-12-10 10:04:48 EST"
    user  system elapsed 
-  2.823   0.201   3.298 
+  2.949   0.206   3.296 
 ─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────
  setting  value                       
  version  R version 3.5.1 (2018-07-02)
@@ -48,7 +48,7 @@ Loading required package: GenomeInfoDb
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       America/New_York            
- date     2018-12-06                  
+ date     2018-12-10                  
 
 ─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────
  package          * version   date       lib source        
