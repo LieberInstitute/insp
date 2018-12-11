@@ -1,6 +1,7 @@
 Loading git
 Adding LIBD modules
-**** Creating sumsAICD/recount.bwtool-2018-12-06.bed with the regions ****
+**** Creating sumsAICD/recount.bwtool-2018-12-10.bed with the regions ****
+Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.5.x
 Loading required package: GenomicRanges
 Loading required package: stats4
 Loading required package: BiocGenerics
@@ -38,21 +39,22 @@ The following object is masked from ‘package:base’:
 
 Loading required package: IRanges
 Loading required package: GenomeInfoDb
-Creating script recount-bwtool-commands.2018-12-06
-qsub .recount-bwtool-commands.2018-12-06.sh
-Your job-array 6374676.1-2036:1 ("recount-bwtool-commands.2018-12-06") has been submitted
-Creating script recount-bwtool-commandmerge.2018-12-06
-qsub .recount-bwtool-commandmerge.2018-12-06.sh
-Your job 6374677 ("recount-bwtool-commandmerge.2018-12-06") has been submitted
-Creating script recount-bwtool-run.2018-12-06
-qsub .recount-bwtool-run.2018-12-06.sh
-Your job-array 6374678.1-70603:1 ("recount-bwtool-run.2018-12-06") has been submitted
-Creating script recount-bwtool-single.2018-12-06
-qsub .recount-bwtool-single.2018-12-06.sh
-Your job-array 6374679.1-2034:1 ("recount-bwtool-single.2018-12-06") has been submitted
-Creating script recount-bwtool-large.2018-12-06
-qsub .recount-bwtool-large.2018-12-06.sh
-Your job-array 6374680.2035-2036:1 ("recount-bwtool-large.2018-12-06") has been submitted
-Creating script recount-bwtool-merge.2018-12-06
-qsub .recount-bwtool-merge.2018-12-06.sh
-Your job 6374681 ("recount-bwtool-merge.2018-12-06") has been submitted
+Using the following user library: ~/R/x86_64-pc-linux-gnu-library/3.5.x
+Creating script recount-bwtool-commands.2018-12-10
+qsub .recount-bwtool-commands.2018-12-10.sh
+Your job-array 6380425.1-2036:1 ("recount-bwtool-commands.2018-12-10") has been submitted
+Creating script recount-bwtool-commandmerge.2018-12-10
+qsub .recount-bwtool-commandmerge.2018-12-10.sh
+Your job 6380426 ("recount-bwtool-commandmerge.2018-12-10") has been submitted
+Creating script recount-bwtool-run.2018-12-10
+qsub .recount-bwtool-run.2018-12-10.sh
+Your job-array 6380427.1-70603:1 ("recount-bwtool-run.2018-12-10") has been submitted
+Creating script recount-bwtool-single.2018-12-10
+qsub .recount-bwtool-single.2018-12-10.sh
+Your job-array 6380428.1-2034:1 ("recount-bwtool-single.2018-12-10") has been submitted
+Creating script recount-bwtool-large.2018-12-10
+qsub .recount-bwtool-large.2018-12-10.sh
+Your job-array 6380429.2035-2036:1 ("recount-bwtool-large.2018-12-10") has been submitted
+Creating script recount-bwtool-merge.2018-12-10
+qsub .recount-bwtool-merge.2018-12-10.sh
+Your job 6380430 ("recount-bwtool-merge.2018-12-10") has been submitted
